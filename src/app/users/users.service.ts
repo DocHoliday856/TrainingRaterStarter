@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
+ @Injectable()
 export class UsersService {
   usersMock = [
     { Name: 'Shawn', Email: 'DokHoliday@yahoo.org', Phone: '235-666-7832', Role: 'Student' },

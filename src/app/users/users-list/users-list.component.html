@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col-mid-4"><strong>Name</strong></div>
-    <div class="col-mid-4"><strong>Email</strong></div>
-    <div class="col-mid-4"><strong>Phone</strong></div>
-    <div class="col-mid-4"><strong>Role</strong></div>
+    <div class="col-md-3"><strong>Name</strong></div>
+    <div class="col-md-3"><strong>Email</strong></div>
+    <div class="col-md-3"><strong>Phone</strong></div>
+    <div class="col-md-3"><strong>Role</strong></div>
   </div>
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let user of users">
       <div class="row">
-        <div class="col-md-4">{{ user.Name }}</div>
-        <div class="col-md-4">{{ user.Email }}</div>
-        <div class="col-md-4">{{ user.Phone }}</div>
-        <div class="col-md-4">{{ user.Role }}</div>
+        <div class="col-md-3">{{ user.Name }}</div>
+        <div class="col-md-3">{{ user.Email }}</div>
+        <div class="col-md-3">{{ user.Phone }}</div>
+        <div class="col-md-3">{{ user.Role }}</div>
       </div>
     </li>
   </ul>

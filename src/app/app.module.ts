@@ -15,8 +15,8 @@ import { UsersService } from './users/users.service';
   declarations: [
     AppComponent,
     SessionsListComponent,
+    UsersListComponent,
     HomeComponent,
-    UsersListComponent
   ],
   imports: [
     BrowserModule,
