@@ -1,3 +1,18 @@
-<p>
-  users-list works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-mid-4"><strong>Name</strong></div>
+    <div class="col-mid-4"><strong>Email</strong></div>
+    <div class="col-mid-4"><strong>Phone</strong></div>
+    <div class="col-mid-4"><strong>Role</strong></div>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-md-4">{{ users.Name }}</div>
+        <div class="col-md-4">{{ users.Email }}</div>
+        <div class="col-md-4">{{ users.Phone }}</div>
+        <div class="col-md-4">{{ users.Role }}</div>
+      </div>
+    </li>
+  </ul>
+</div>
