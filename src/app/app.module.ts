@@ -24,8 +24,10 @@ import { UsersService } from './users/users.service';
     AppRoutingModule,
     NgbModule
   ],
-  providers:  [SessionsService],
-              [UsersService],
+  providers:  [
+    SessionsService,
+    UsersService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
