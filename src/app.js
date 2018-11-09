@@ -1,7 +1,7 @@
 const express = require('express');
 require('../config/config');
 const models = require('../models');
-const sessions = require('../controllers/SessionsController');
+const sessions = require('../controllers/SessionsController').Sessions;
 
 const app = express();
 
@@ -25,17 +25,16 @@ app.get('/sessions/:sessionId', sessions.get);
 
 module.exports = app;
 
-const get = (req, res) => {
+const get = async (req, res) => {
+    let err, session;
     let sessionId = parseInt(req.params.sessionId);
     res.setHeader('Content-Type', 'application/json');
 
-    let sessions = [{ Id: 1, Name: 'John Teaches Angular', Location: 'Miles-U 1' },
-    { Id: 2,Name: 'Scott Teaches AWS', Location: 'Miles-U 2' },
-    { Id: 3,Name: 'Jack Teaches PODIS', Location: 'Jacks Desk' },
-    ];
-
-    let session = sessions.find(obj => obj.Id === sessionId);
-    console.log(session);
+    [err, session] = await to(Sessions.findById(sessionId));
+    if (!session) {
+        res.statusCode = 404
+        return res.json({ success: false, error: err});
+    }
     return res.json(session);
-};
+}
 module.exports.get = get;

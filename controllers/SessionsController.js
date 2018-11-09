@@ -1,14 +1,18 @@
 const Sessions = require('../models').Sessions;
 
-const getAll = (req, res) => {
+const getAll = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     let err, sessions;
-    sessions = [{ Name: 'John Teaches Angular', Location: 'Miles-U 1' },
-    { Name: 'Scott Teaches AWS', Location: 'Miles-U 2' },
-    { Name: 'Jack Teaches PODIS', Location: 'Jacks Desk' },
-    ];
+    
+    let whereStatement = {};
+    if (req.query.name) {
+        whereStatement.name = {
+            $like: '%' + req.query.name + '%'
+        } ;
+    }
 
 
+    [err, sessions] = await to(Sessions.findAll({where: whereStatement}))
     return res.json(sessions);
 }
 module.exports.getAll = getAll;
