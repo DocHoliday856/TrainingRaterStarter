@@ -1,9 +1,14 @@
 const express = require('express');
 require('../config/config');
 const models = require('../models');
+require('../global_functions');
 const sessions = require('../controllers/SessionsController').Sessions;
-
+const users = require('../controllers/UsersController').Users;
+const bodyParser = require('body-parser');
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => { res.send('Hello World!');});
 
@@ -22,19 +27,12 @@ if (CONFIG.app == 'dev' ){
 
 app.get('/sessions', sessions.getAll);
 app.get('/sessions/:sessionId', sessions.get);
+app.post('/sessions', sessions.create);
+app.put('/sessions', sessions.update);
+
+app.get('/users', users.getAll);
+app.get('/users/:userId', users.get);
+app.post('/users', users.create);
+app.put('/users', users.update);
 
 module.exports = app;
-
-const get = async (req, res) => {
-    let err, session;
-    let sessionId = parseInt(req.params.sessionId);
-    res.setHeader('Content-Type', 'application/json');
-
-    [err, session] = await to(Sessions.findById(sessionId));
-    if (!session) {
-        res.statusCode = 404
-        return res.json({ success: false, error: err});
-    }
-    return res.json(session);
-}
-module.exports.get = get;
