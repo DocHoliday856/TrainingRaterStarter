@@ -1,9 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Sessions = sequelize.define('Users', {
+  var Users = sequelize.define('Users', {
     name: { type: DataTypes.STRING, allowNull:false},
-    startTime: { type: DataTypes.DATE, allowNull:false},
-    location: DataTypes.STRING
+    email: { type: DataTypes.STRING, allowNull:false},
+    phone: DataTypes.STRING,
+    role: { type: DataTypes.STRING, allowNull:false},
   }, {});
-  return Sessions;
+  return Users;
 };

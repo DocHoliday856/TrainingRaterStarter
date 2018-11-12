@@ -27,9 +27,42 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+    }),
+    queryInterface.createTable('Users', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      phone: {
+        type: Sequelize.STRING
+      },
+      role: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
     });
+    
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Sessions');
+    return queryInterface.dropTable('Sessions'),
+    queryInterface.dropTable('Sessions');
   }
 };

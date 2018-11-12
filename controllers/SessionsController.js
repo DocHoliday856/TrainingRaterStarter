@@ -12,7 +12,7 @@ const getAll = async (req, res) => {
     }
 
 
-    [err, sessions] = await to(Sessions.findAll({where: whereStatement}))
+    [err, sessions] = await to(Sessions.findAll({ where: whereStatement }));
     return res.json(sessions);
 }
 module.exports.getAll = getAll;

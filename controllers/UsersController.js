@@ -2,34 +2,33 @@ const Users = require('../models').Users;
 
 const getAll = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    let err, Users;
+    let err, users;
     
     let whereStatement = {};
     if (req.query.name) {
         whereStatement.name = {
             $like: '%' + req.query.name + '%'
-        } ;
+        };
     }
 
 
-    [err, Users] = await to(Users.findAll({where: whereStatement}))
-    return res.json(Users);
+    [err, users] = await to(Users.findAll({where: whereStatement}));
+    return res.json(users);
 }
 module.exports.getAll = getAll;
 
 const get = async (req, res) => {
-    let err, user;
-    let userId = parseInt(req.params.userId)
-    res.setHeader('Content-Type', 'application/json');
-  
-    let userId = parseInt(req.params.userId)
-    [err, user] = await to(Users.findById(sessionId))
-    if (!user) {
-      res.statusCode = 404;
-      return res.json({ success: false, error: err });
-    }
-    return res.json(user);
+  let err, user;
+  let userId = parseInt(req.params.userId)
+  res.setHeader('Content-Type', 'application/json');
+
+  [err, user] = await to(Users.findById(userId))
+  if (!user) {
+    res.statusCode = 404;
+    return res.json({ success: false, error: err });
   }
+  return res.json(user);
+}
   module.exports.get = get;
   
   
@@ -62,7 +61,7 @@ const get = async (req, res) => {
     let err, user, userInfo;
   
     userInfo = req.body;
-    [err, session] = await to(Users.create(userInfo));
+    [err, user] = await to(Users.create(userInfo));
     if (err) {
       if (typeof err == 'object' && typeof err.message != 'undefined') {
         err = err.message;
