@@ -12,6 +12,15 @@ require('./global_functions');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// CORS
+app.use(function (req, res, next) {
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    // Pass to next layer of middleware
+    next();
+  });
+  
+
 app.get('/', (req, res) => { res.send('Hello World!');});
 
 models.sequelize
@@ -27,10 +36,10 @@ if (CONFIG.app == 'dev' ){
     models.sequelize.sync();
 }
 
-/*app.get('/sessions', sessions.getAll);
+app.get('/sessions', sessions.getAll);
 app.get('/sessions/:sessionId', sessions.get);
 app.post('/sessions', sessions.create);
-app.put('/sessions', sessions.update);*/
+app.put('/sessions', sessions.update);``
 
 app.get('/users', users.getAll);
 app.get('/users/:userId', users.get);
