@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService, IUsers} from '../users.service';
+import { UsersService, IUser} from '../users.service';
 
 @Component({
   selector: 'app-users-list',
@@ -7,7 +7,7 @@ import { UsersService, IUsers} from '../users.service';
   styleUrls: ['./users-list.component.less']
 })
 export class UsersListComponent implements OnInit {
-  users: IUsers[] = [];
+  users: IUser[] = [];
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
