@@ -14,7 +14,7 @@ export class SessionsListComponent implements OnInit {
   ngOnInit() {
     this.sessionsService.getSessions()
       .subscribe(
-        (sessions) => this,sessions = sessions,
+        (sessions) => this.sessions = sessions,
       );
   }
 

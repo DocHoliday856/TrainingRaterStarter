@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SessionsModule } from './sessions/sessions.module';
-import { UsersModule } from './Users/users.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [

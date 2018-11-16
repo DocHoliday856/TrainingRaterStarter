@@ -6,9 +6,9 @@ export interface ISession {
   id: number;
   name: string;
   location: string;
-  startTime: string;
-  createdAt: string;
-  updatedAt: string;
+  startTime: Date | string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 @Injectable()
 export class SessionsService {
@@ -19,4 +19,9 @@ export class SessionsService {
   getSessions(): Observable<ISession[]> {
     return this.http.get<ISession[]>('http://localhost:3000/sessions');
   }
+
+  createSessions(session: ISession): Observable<ISession> {
+    return this.http.post<ISession>('http://localhost:3000/sessions', session);
  }
+
+}
