@@ -1,5 +1,5 @@
 <div class="container">
-  <button class="btn btn-primary" >New Session</button>
+  <button class="btn btn-primary" (click)="goToAdd()">Add Session</button>
   <div class="row">
     <div class="col-md-4"><strong>Session</strong></div>
     <div class="col-md-4"><strong>Location</strong></div>
@@ -8,11 +8,10 @@
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let session of sessions">
       <div class="row">
+      <div class="row" [style.cursor]="'pointer'" (click)="goToEdit(session.id)">
         <div class="col-md-4">{{ session.name }}</div>
         <div class="col-md-4">{{ session.location }}</div>
-        <div class="col-md-4">{{ session.startTime }}</div>
+        <div class="col-md-4">{{ session.startTime | date:'short' }}</div>
       </div>
-    </li>
-  </ul>
-  <!-- </div> -->
-</div>
+    <li>
+  <ul>
