@@ -52,7 +52,7 @@ export class UsersDetailComponent implements OnInit {
             });
     }
      private formValid(): boolean {
-        return this.user.name && this.user.role ? true : false;
+        return this.user.name ? true : false;
     }
      cancel(): void {
         this.router.navigate(['users']);

@@ -41,10 +41,9 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       phone: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       role: {
         type: Sequelize.STRING,
@@ -63,6 +62,6 @@ module.exports = {
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Sessions'),
-    queryInterface.dropTable('Sessions');
+    queryInterface.dropTable('Users');
   }
 };
