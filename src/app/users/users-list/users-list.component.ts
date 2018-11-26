@@ -29,7 +29,7 @@ export class UsersListComponent implements OnInit {
   }
 
    goToEdit(id: number): void {
-    this.router.navigate([`user/${id}`]);
+    this.router.navigate([`users/${id}`]);
    }
 
 }

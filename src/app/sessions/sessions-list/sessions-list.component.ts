@@ -30,6 +30,6 @@ export class SessionsListComponent implements OnInit {
   }
 
   goToEdit(id: number): void {
-    this.router.navigate(['sessions/${id}']);
+    this.router.navigate([`sessions/${id}`]);
   }
 }
