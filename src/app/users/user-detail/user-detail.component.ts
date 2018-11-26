@@ -29,8 +29,8 @@ export class UsersDetailComponent implements OnInit {
                 email: '',
                 phone: '',
                 role: '',
-                createdAt: null, // TODO Determine how to assign values
-                updatedAt: null,
+                createdAt: this.getLocalDateTime(), // TODO Determine how to assign values
+                updatedAt: this.getLocalDateTime(),
             };
         }
     }

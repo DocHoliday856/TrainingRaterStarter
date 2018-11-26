@@ -22,14 +22,14 @@ getUsers(): Observable<IUser[]> {
   }
 
   getUserById(id: number): Observable<IUser> {
-    return this.http.get<IUser>(`http://localhost:3000/sessions/${id}`);
+    return this.http.get<IUser>(`http://localhost:3000/users/${id}`);
   }
 
   save(user: IUser): Observable<IUser | number[]> {
     if (user.id) {
-      return this.http.put<number[]>(`http://localhost:3000/sessions`, user);
+      return this.http.put<number[]>(`http://localhost:3000/users`, user);
     } else {
-      return this.http.post<IUser>(`http://localhost:3000/sessions`, user);
+      return this.http.post<IUser>(`http://localhost:3000/users`, user);
     }
   }
 }
