@@ -33,7 +33,7 @@ export class SessionsDetailComponent implements OnInit {
                 name: '',
                 location: '',
                 startTime: this.getLocalDateTime(),
-                createdAt: null, // TODO Determine how to assign values
+                createdAt: new Date(),
                 updatedAt: null,
             };
         }
@@ -48,6 +48,7 @@ export class SessionsDetailComponent implements OnInit {
             this.toastsManager.error('Form invalid');
             return;
         }
+        this.session.updatedAt = new Date();
         this.sessionsService.save(this.session)
             .subscribe((session) => {
                 this.toastsManager.success('Session saved');
