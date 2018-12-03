@@ -25,10 +25,13 @@ export class UsersDetailComponent implements OnInit {
             // new
             this.user = {
                 id: 0,
-                name: '',
+                first: '',
+                last: '',
                 email: '',
                 phone: '',
                 role: '',
+                info: '',
+                password: '',
                 createdAt: this.getLocalDateTime(), // TODO Determine how to assign values
                 updatedAt: this.getLocalDateTime(),
             };
@@ -52,7 +55,7 @@ export class UsersDetailComponent implements OnInit {
             });
     }
      private formValid(): boolean {
-        return this.user.name ? true : false;
+        return this.user.email ? true : false;
     }
      cancel(): void {
         this.router.navigate(['users']);

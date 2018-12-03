@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     last: DataTypes.STRING,
     email: { type: DataTypes.STRING, unique: true, validate: { isEmail: { msg: 'Email is invalid' } } },
     phone: { type: DataTypes.STRING, allowNull: true, validate: { len: { args: [7, 20], msg: 'Phone number invalid.' }, isNumeric: { msg: 'Not a valid phone number.' } } },
-    isTrainer: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
-    aboutMe: DataTypes.STRING,
+    role: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+    info: DataTypes.STRING,
     password: DataTypes.STRING
   }, {
       classMethods: {

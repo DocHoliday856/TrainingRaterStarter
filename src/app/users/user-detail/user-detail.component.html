@@ -3,8 +3,11 @@
       <div *ngIf="this.user" class="well well-sm">
         <h4>User Detail</h4>
 
-        <label>Name</label>
-        <input type="text" class="form-control" [(ngModel)]="user.name" />
+        <label>First Name</label>
+        <input type="text" class="form-control" [(ngModel)]="user.first" />
+
+        <label>Last Name</label>
+        <input type="text" class="form-control" [(ngModel)]="user.last" />
          
         <label>Email</label>
         <input type="text" class="form-control" [(ngModel)]="user.email" />
@@ -14,6 +17,12 @@
 
         <label>Role</label>
         <input type="text" class="form-control" [(ngModel)]="user.role" />
+
+        <label>Info</label>
+        <input type="text" class="form-control" [(ngModel)]="user.info" />
+
+        <label>Password</label>
+        <input type="text" class="form-control" [(ngModel)]="user.password" />
          
         <br>
         <button class="btn btn-primary" (click)="save()">Save</button>

@@ -20,10 +20,10 @@ module.exports = {
       phone: {
         type: Sequelize.STRING
       },
-      isTrainer: {
+      role: {
         type: Sequelize.BOOLEAN
       },
-      aboutMe: {
+      info: {
         type: Sequelize.STRING
       },
       password: {
