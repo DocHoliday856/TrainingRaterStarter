@@ -58,7 +58,9 @@ models.sequelize
     });
 
 if (CONFIG.app == 'dev' ){
-    models.sequelize.sync();
+    //models.sequelize.sync();
+    models.sequelize.sync({force: true}); // will drop all tables before synchronizing
+
 }
 
 app.get('/sessions', passport.authenticate('jwt', { session: false }), sessions.getAll);
