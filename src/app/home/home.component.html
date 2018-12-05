@@ -18,9 +18,9 @@
       <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
     </div>
     <div class="row">
-      <button class="btn btn-primary">
+      <button class="btn btn-primary" (click)="count = count + 1">
         My Awards
-        <span class="badge badge-light">4</span>
+        <span class="badge badge-light" [innerText]="count"></span>
       </button>
     </div>
   </div>
