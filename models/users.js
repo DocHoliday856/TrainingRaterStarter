@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
           // associations can be defined here
         }
       }
-    });
+  });
+
   Users.beforeSave(async (user) => {
     let err;
     if (user.changed('password')) {
@@ -29,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       if (err) TE(err.message, true);
        user.password = hash;
     }
-  })
+  });
    
   Users.prototype.comparePassword = async function (pw) {
     let err, pass
@@ -38,17 +39,12 @@ module.exports = (sequelize, DataTypes) => {
     if (err) TE(err);
      if (!pass) TE('invalid password');
      return this;
-  }
-   Users.prototype.getJWT = function () {
+  };
+
+  Users.prototype.getJWT = function () {
     let expiration_time = parseInt(CONFIG.jwt_expiration);
     return "Bearer " + jwt.sign({ user_id: this.id }, CONFIG.jwt_encryption, { expiresIn: expiration_time });
   };
-  return Users;
-};
 
-Users.prototype.getJWT = function () {
-  let expiration_time = parseInt(CONFIG.jwt_expiration);
-  return "Bearer " + jwt.sign({ user_id: this.id }, CONFIG.jwt_encryption, { expiresIn: expiration_time });
-};
-return Users;
+  return Users;
 };

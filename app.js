@@ -1,7 +1,7 @@
 const express = require('express');
-const app = express();
 require('./config/config');
 const models = require('./models');
+require('./global_functions');
 const sessions = require('./controllers/SessionsController');
 const users = require('./controllers/UsersController');
 const bodyParser = require('body-parser');
@@ -9,7 +9,7 @@ const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const Users = require('./models').Users;
-require('./global_functions');
+const app = express();
 
 
 
@@ -23,7 +23,8 @@ opts.secretOrKey = CONFIG.jwt_encryption;
 passport.use(new JwtStrategy(opts, async function (jwt_payload, done) {
     let err, user;
     [err, user] = await to(Users.findById(jwt_payload.user_id));
-     if (err) return done(err, false);
+     
+    if (err) return done(err, false);
     if (user) {
       return done(null, user);
     } else {
@@ -50,14 +51,14 @@ app.use(function (req, res, next) {
 
 models.sequelize
     .authenticate()
-    .then(() =>{
+    .then(() => {
         console.log('Connection has been established successfully.');
     })
     .catch(err => {
-        console.log('Unable to connect to the database:', err);
+        console.error('Unable to connect to the database:', err);
     });
 
-if (CONFIG.app == 'dev' ){
+if (CONFIG.app === 'dev'){
     //models.sequelize.sync();
     models.sequelize.sync({force: true}); // will drop all tables before synchronizing
 
