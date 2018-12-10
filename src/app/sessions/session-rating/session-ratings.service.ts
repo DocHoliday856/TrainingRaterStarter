@@ -32,19 +32,7 @@ export class SessionRatingsService {
     const avg = sum / ratings.length;
     return Observable.of(avg);
   }
-  getUserRating(sessionId: number): Observable<number> {
-    const ratings = this.ratings
-      .filter(
-        (ratingObj) => ratingObj.sessionId === sessionId,
-      ).map(
-        (ratingObj: ISessionRating) => ratingObj.rating,
-      );
-    if (!this.ratings.length) {
-      return Observable.of(null);
-    }
-    return Observable.of(ratings);
-  }
-   hasBeenRatedByUser(userId: number, sessionId: number): Observable<boolean> {
+  hasBeenRatedByUser(userId: number, sessionId: number): Observable<boolean> {
     const hasBeenRated = this.ratings.some(
       (rating) => rating.userId === userId && rating.sessionId === sessionId,
     );
@@ -60,7 +48,6 @@ export class SessionRatingsService {
    save(rating: ISessionRating): Observable<ISessionRating> {
     this.ratings.push(rating);
     console.log([...this.ratings]);
-    return Observable.of(rating);
-    // this.http.post
+    return this.http.post<ISessionRating>('http://localhost:3000/ratings/' + rating.sessionId, rating);
   }
  }
