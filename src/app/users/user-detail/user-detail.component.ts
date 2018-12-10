@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser, UsersService } from '../users.service';
+import { ToastsManager } from 'ng2-toastr';
  @Component({
     templateUrl: './user-detail.component.html',
 })
@@ -10,6 +11,7 @@ export class UsersDetailComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private usersService: UsersService,
+        private toastsManager: ToastsManager,
     ) { }
      ngOnInit() {
         let id: string | number = this.route.snapshot.paramMap.get('userId');
@@ -33,7 +35,7 @@ export class UsersDetailComponent implements OnInit {
                 info: '',
                 password: '',
                 createdAt: this.getLocalDateTime(), // TODO Determine how to assign values
-                updatedAt: this.getLocalDateTime(),
+                updatedAt: null,
             };
         }
     }
@@ -50,7 +52,7 @@ export class UsersDetailComponent implements OnInit {
         }
         this.usersService.save(this.user)
             .subscribe((user) => {
-                // TODO CCC: add a success message
+                this.toastsManager.success('User saved');
                 this.router.navigate(['users']);
             });
     }

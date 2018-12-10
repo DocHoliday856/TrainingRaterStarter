@@ -17,7 +17,7 @@ export class SessionRatingsService {
    constructor(
     private http: HttpClient,
   ) { }
-   getAvgRating(sessionId: number): Observable<number> {
+  getAvgRating(sessionId: number): Observable<number> {
     const ratings = this.ratings
       .filter(
         (ratingObj) => ratingObj.sessionId === sessionId,
@@ -32,6 +32,21 @@ export class SessionRatingsService {
     const avg = sum / ratings.length;
     return Observable.of(avg);
   }
+  getUserRating(userId: number, sessionId: number): Observable<number> {
+    const rated = this.ratings
+    .filter(
+      (ratingObj) => ratingObj.sessionId === sessionId,
+      (ratingObj) => ratingObj.userId === userId,
+    ).map(
+      (ratingObj: ISessionRating) => ratingObj.rating,
+    );
+    if (!this.hasBeenRatedByUser(userId, sessionId)) {
+      return Observable.of(null);
+    }
+      const ur = this.ratings.find( i => i.userId === 1).rating;
+
+      return Observable.of(ur);
+  }
   hasBeenRatedByUser(userId: number, sessionId: number): Observable<boolean> {
     const hasBeenRated = this.ratings.some(
       (rating) => rating.userId === userId && rating.sessionId === sessionId,
@@ -43,7 +58,7 @@ export class SessionRatingsService {
       .filter(
         (rating) => rating.sessionId === sessionId,
       );
-    return Observable.of(ratings);
+    return this.http.get<ISessionRating[]>(`http://localhost:3000/sessions/${ratings}`);
   }
    save(rating: ISessionRating): Observable<ISessionRating> {
     this.ratings.push(rating);

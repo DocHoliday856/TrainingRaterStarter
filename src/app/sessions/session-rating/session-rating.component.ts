@@ -7,10 +7,11 @@ import { ToastsManager } from 'ng2-toastr';
 })
 export class SessionRatingComponent implements OnInit {
     @Input() sessionId: number;
+    userId: number;
     hasBeenRatedByUser: boolean;
     ratingMode = false;
     avgRating: number;
-    userRating: RatingValue;
+    userRating: number;
     selectedRating: RatingValue;
     ratings: { value: RatingValue, name: string }[] = [
         { value: 1, name: '1 star' },
@@ -23,14 +24,22 @@ export class SessionRatingComponent implements OnInit {
         private ratingService: SessionRatingsService,
         private toastManager: ToastsManager,
     ) { }
-     ngOnInit() {
+    ngOnInit() {
         this.getAvgRating();
+        this.getUserRating();
+        console.log('The current user id is:' + this.userId);
+        // TODO SD: Pull current User id from passport
+        // this.ratingService.hasBeenRatedByUser(this.userId, this.sessionId)
         this.ratingService.hasBeenRatedByUser(1, this.sessionId)
             .subscribe((hasBeenRated) => this.hasBeenRatedByUser = hasBeenRated);
     }
      getAvgRating(): void {
         this.ratingService.getAvgRating(this.sessionId)
             .subscribe((avgRating) => this.avgRating = avgRating);
+    }
+    getUserRating(): void {
+        this.ratingService.getUserRating(this.userId, this.sessionId)
+        .subscribe((userRating) => this.userRating = userRating);
     }
      stopTheClick(event: Event): void {
         event.stopPropagation();
