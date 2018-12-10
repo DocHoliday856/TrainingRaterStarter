@@ -35,6 +35,8 @@ export class SessionsDetailComponent implements OnInit {
                 startTime: this.getLocalDateTime(),
                 createdAt: new Date(),
                 updatedAt: null,
+                avgRating: 0,
+                userRating: null,
             };
         }
     }

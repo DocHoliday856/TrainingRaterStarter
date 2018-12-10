@@ -7,9 +7,10 @@ import { ToastsManager } from 'ng2-toastr';
 })
 export class SessionRatingComponent implements OnInit {
     @Input() sessionId: number;
-     hasBeenRatedByUser: boolean;
+    hasBeenRatedByUser: boolean;
     ratingMode = false;
     avgRating: number;
+    userRating: RatingValue;
     selectedRating: RatingValue;
     ratings: { value: RatingValue, name: string }[] = [
         { value: 1, name: '1 star' },

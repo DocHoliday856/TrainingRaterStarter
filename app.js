@@ -3,6 +3,7 @@ require('./config/config');
 const models = require('./models');
 require('./global_functions');
 const sessions = require('./controllers/SessionsController');
+const ratings = require('./controllers/RatingsController');
 const users = require('./controllers/UsersController');
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -59,8 +60,8 @@ models.sequelize
     });
 
 if (CONFIG.app === 'dev'){
-    //models.sequelize.sync();
-    models.sequelize.sync({force: true}); // will drop all tables before synchronizing
+    models.sequelize.sync();
+    //models.sequelize.sync({force: true}); // will drop all tables before synchronizing
 
 }
 
@@ -70,6 +71,9 @@ app.post('/sessions', passport.authenticate('jwt', { session: false }), sessions
 app.put('/sessions', passport.authenticate('jwt', { session: false }), sessions.update);
 
 app.post('/login', users.login);
+
+app.post('/ratings/:sessionId', passport.authenticate('jwt', { session: false }), ratings.create);
+app.put('/ratings/:ratingId', passport.authenticate('jwt', { session: false }), ratings.update);
 
 app.get('/users', users.getAll);
 app.get('/users/:userId', users.get);

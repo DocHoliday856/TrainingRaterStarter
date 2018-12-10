@@ -32,6 +32,18 @@ export class SessionRatingsService {
     const avg = sum / ratings.length;
     return Observable.of(avg);
   }
+  getUserRating(sessionId: number): Observable<number> {
+    const ratings = this.ratings
+      .filter(
+        (ratingObj) => ratingObj.sessionId === sessionId,
+      ).map(
+        (ratingObj: ISessionRating) => ratingObj.rating,
+      );
+    if (!this.ratings.length) {
+      return Observable.of(null);
+    }
+    return Observable.of(ratings);
+  }
    hasBeenRatedByUser(userId: number, sessionId: number): Observable<boolean> {
     const hasBeenRated = this.ratings.some(
       (rating) => rating.userId === userId && rating.sessionId === sessionId,

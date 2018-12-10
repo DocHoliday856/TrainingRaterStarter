@@ -1,4 +1,6 @@
 const Sessions = require('../models').Sessions;
+const Ratings = require('../models').Ratings;
+
 
 const getAll = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
@@ -12,8 +14,24 @@ const getAll = async (req, res) => {
     }
 
 
-    [err, sessions] = await to(Sessions.findAll({ where: whereStatement }));
-    return res.json(sessions);
+    [err, sessions] = await to(Sessions.findAll({ include: [{ model: Ratings }], where: whereStatement }));
+
+    let sessionWithAverage = [];
+
+    for (let i in sessions ) {
+      let sessionInfo = sessions[i].toJSON();
+      sessionInfo.avgRating = 0;
+      for (let r in sessionInfo.Ratings) {
+        sessionInfo.avgRating += parseInt(sessionInfo.Ratings[r].rating);
+      }
+
+      if (sessionInfo.Ratings.length > 0) {
+        sessionInfo.avgRating = sessionInfo.avgRating / sessionInfo.Ratings.length;
+      }
+      sessionWithAverage.push(sessionInfo);
+    }
+
+    return res.json(sessionWithAverage);
 }
 module.exports.getAll = getAll;
 

@@ -4,7 +4,7 @@
       no ratings yet
     </div>
     <div class="col-md-6" *ngIf="avgRating">
-      {{avgRating}} stars
+      {{userRating}} stars
     </div>
     <div *ngIf="hasBeenRatedByUser !== undefined && !hasBeenRatedByUser" class="col-md-6">
       <button class="btn btn-sm btn-secondary" (click)="ratingMode = true">Rate</button>
